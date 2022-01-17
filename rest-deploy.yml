@@ -1,0 +1,45 @@
+# Rest-container
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rest-container
+  name: rest-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-container
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rest-container
+    spec:
+      containers:
+        - name: rest-container
+          image: cogitoparadigm/assignment06-rest:test
+status: {}
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rest-container-service
+  name: rest-container-service
+spec:
+  type: NodePort
+  ports:
+    - name: port
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: rest-container
+status:
+  loadBalancer: {}
