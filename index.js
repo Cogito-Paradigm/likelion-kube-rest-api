@@ -99,7 +99,58 @@ app.get('/api/detail', (req, res) => {
 	console.log('====================================');
 	console.log(info);
 	console.log('====================================');
-	res.json({ info: info });
+	res.json({ info });
+});
+
+app.post('/api/movie/add', (req, res) => {
+	const { id, title, detail } = req.body;
+	const info = infos.concat({ id, title, detail });
+	res.json({ info });
+});
+
+app.put('/api/movie/update', (req, res) => {
+	const { id, title, detail } = req.body;
+	const info = infos.map((data) => {
+		if (data.id == id) {
+			if (data.id == id) {
+				data.title = title;
+				data.detail = detail;
+			}
+		}
+		return {
+			id: data.id,
+			title: data.title,
+			detail: data.detail,
+		};
+	});
+
+	res.json({ info });
+});
+
+app.patch('/api/movie/update/:id', (req, res) => {
+	const { id } = req.params;
+	const { title, detail } = req.body;
+	const info = infos.map((data) => {
+		if (data.id == id) {
+			if (data.id == id) {
+				data.title = title;
+				data.detail = detail;
+			}
+		}
+		return {
+			id: data.id,
+			title: data.title,
+			detail: data.detail,
+		};
+	});
+
+	res.json({ info });
+});
+
+app.delete('/api/movie/delete', (req, res) => {
+	const id = req.query.id;
+	const info = infos.filter((data) => data.id != id);
+	res.json({ info });
 });
 
 // http listen port 생성 서버 실행
