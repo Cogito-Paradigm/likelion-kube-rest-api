@@ -102,13 +102,13 @@ app.get('/api/detail', (req, res) => {
 	res.json({ info });
 });
 
-app.post('/api/movie/add', (req, res) => {
+app.post('/api/detail', (req, res) => {
 	const { id, title, detail } = req.body;
 	const info = infos.concat({ id, title, detail });
 	res.json({ info });
 });
 
-app.put('/api/movie/update', (req, res) => {
+app.put('/api/detail', (req, res) => {
 	const { id, title, detail } = req.body;
 	const info = infos.map((data) => {
 		if (data.id == id) {
@@ -123,13 +123,11 @@ app.put('/api/movie/update', (req, res) => {
 			detail: data.detail,
 		};
 	});
-
 	res.json({ info });
 });
 
-app.patch('/api/movie/update/:id', (req, res) => {
-	const { id } = req.params;
-	const { title, detail } = req.body;
+app.patch('/api/detail', (req, res) => {
+	const { id, title, detail } = req.body;
 	const info = infos.map((data) => {
 		if (data.id == id) {
 			if (data.id == id) {
@@ -143,11 +141,10 @@ app.patch('/api/movie/update/:id', (req, res) => {
 			detail: data.detail,
 		};
 	});
-
 	res.json({ info });
 });
 
-app.delete('/api/movie/delete', (req, res) => {
+app.delete('/api/detail', (req, res) => {
 	const id = req.query.id;
 	const info = infos.filter((data) => data.id != id);
 	res.json({ info });
